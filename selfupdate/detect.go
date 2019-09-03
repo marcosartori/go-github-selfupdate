@@ -88,7 +88,7 @@ func findReleaseAndAsset(rels []*github.RepositoryRelease, targetVersion string)
 
 	// Find the latest version from the list of releases.
 	// Returned list from GitHub API is in the order of the date when created.
-	//   ref: https://github.com/rhysd/go-github-selfupdate/issues/11
+	//   ref: https://github.com/marcosartori/go-github-selfupdate/issues/11
 	for _, rel := range rels {
 		if a, v, ok := findAssetFromReleasse(rel, suffixes, targetVersion); ok {
 			// Note: any version with suffix is less than any version without suffix.

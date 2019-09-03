@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/rhysd/go-github-selfupdate/selfupdate"
+	"github.com/marcosartori/go-github-selfupdate/selfupdate"
 	"go/build"
 	"io"
 	"net/http"
@@ -28,7 +28,7 @@ func getCommand(pkg string) string {
 	_, cmd := filepath.Split(pkg)
 	if cmd == "" {
 		// When pkg path is ending with path separator, we need to split it out.
-		// i.e. github.com/rhysd/foo/cmd/bar/
+		// i.e. github.com/marcosartori/foo/cmd/bar/
 		_, cmd = filepath.Split(cmd)
 	}
 	return cmd

@@ -10,7 +10,7 @@ import (
 )
 
 func TestDetectReleaseWithVersionPrefix(t *testing.T) {
-	r, ok, err := DetectLatest("rhysd/github-clone-all")
+	r, ok, err := DetectLatest("marcosartori/github-clone-all")
 	if err != nil {
 		t.Fatal("Fetch failed:", err)
 	}
@@ -44,7 +44,7 @@ func TestDetectReleaseWithVersionPrefix(t *testing.T) {
 	if r.PublishedAt.IsZero() {
 		t.Error("Release time is unexpectedly zero")
 	}
-	if r.RepoOwner != "rhysd" {
+	if r.RepoOwner != "marcosartori" {
 		t.Error("Repo owner is not correct:", r.RepoOwner)
 	}
 	if r.RepoName != "github-clone-all" {
@@ -54,7 +54,7 @@ func TestDetectReleaseWithVersionPrefix(t *testing.T) {
 
 func TestDetectVersionExisting(t *testing.T) {
 	testVersion := "v2.2.0"
-	r, ok, err := DetectVersion("rhysd/github-clone-all", testVersion)
+	r, ok, err := DetectVersion("marcosartori/github-clone-all", testVersion)
 	if err != nil {
 		t.Fatal("Fetch failed:", err)
 	}
@@ -67,7 +67,7 @@ func TestDetectVersionExisting(t *testing.T) {
 }
 
 func TestDetectVersionNotExisting(t *testing.T) {
-	r, ok, err := DetectVersion("rhysd/github-clone-all", "foobar")
+	r, ok, err := DetectVersion("marcosartori/github-clone-all", "foobar")
 	if err != nil {
 		t.Fatal("Fetch failed:", err)
 	}
@@ -84,11 +84,11 @@ func TestDetectReleasesForVariousArchives(t *testing.T) {
 		slug   string
 		prefix string
 	}{
-		{"rhysd-test/test-release-zip", "v"},
-		{"rhysd-test/test-release-tar", "v"},
-		{"rhysd-test/test-release-gzip", "v"},
-		{"rhysd-test/test-release-xz", "release-v"},
-		{"rhysd-test/test-release-tar-xz", "release-"},
+		{"marcosartori-test/test-release-zip", "v"},
+		{"marcosartori-test/test-release-tar", "v"},
+		{"marcosartori-test/test-release-gzip", "v"},
+		{"marcosartori-test/test-release-xz", "release-v"},
+		{"marcosartori-test/test-release-tar-xz", "release-"},
 	} {
 		t.Run(tc.slug, func(t *testing.T) {
 			r, ok, err := DetectLatest(tc.slug)
@@ -126,8 +126,8 @@ func TestDetectReleasesForVariousArchives(t *testing.T) {
 			if r.PublishedAt.IsZero() {
 				t.Error("Release time is unexpectedly zero")
 			}
-			if r.RepoOwner != "rhysd-test" {
-				t.Error("Repo owner should be rhysd-test:", r.RepoOwner)
+			if r.RepoOwner != "marcosartori-test" {
+				t.Error("Repo owner should be marcosartori-test:", r.RepoOwner)
 			}
 			if !strings.HasPrefix(r.RepoName, "test-release-") {
 				t.Error("Repo name was not properly detectd:", r.RepoName)
@@ -137,7 +137,7 @@ func TestDetectReleasesForVariousArchives(t *testing.T) {
 }
 
 func TestDetectReleaseButNoAsset(t *testing.T) {
-	_, ok, err := DetectLatest("rhysd/clever-f.vim")
+	_, ok, err := DetectLatest("marcosartori/clever-f.vim")
 	if err != nil {
 		t.Fatal("Fetch failed:", err)
 	}
@@ -147,7 +147,7 @@ func TestDetectReleaseButNoAsset(t *testing.T) {
 }
 
 func TestDetectNoRelease(t *testing.T) {
-	_, ok, err := DetectLatest("rhysd/clever-f.vim")
+	_, ok, err := DetectLatest("marcosartori/clever-f.vim")
 	if err != nil {
 		t.Fatal("Fetch failed:", err)
 	}
@@ -177,7 +177,7 @@ func TestInvalidSlug(t *testing.T) {
 }
 
 func TestNonExistingRepo(t *testing.T) {
-	v, ok, err := DetectLatest("rhysd/non-existing-repo")
+	v, ok, err := DetectLatest("marcosartori/non-existing-repo")
 	if err != nil {
 		t.Fatal("Non-existing repo should not cause an error:", v)
 	}
@@ -187,7 +187,7 @@ func TestNonExistingRepo(t *testing.T) {
 }
 
 func TestNoReleaseFound(t *testing.T) {
-	_, ok, err := DetectLatest("rhysd/misc")
+	_, ok, err := DetectLatest("marcosartori/misc")
 	if err != nil {
 		t.Fatal("Repo having no release should not cause an error:", err)
 	}

@@ -36,9 +36,9 @@ And small wrapper CLIs are provided:
 - [detect-latest-release](./cmd/detect-latest-release): Detect the latest release of given GitHub repository from command line
 - [go-get-release](./cmd/go-get-release): Like `go get`, but install a release binary from GitHub instead
 
-[Slide at GoCon 2018 Spring (Japanese)](https://speakerdeck.com/rhysd/go-selfupdate-github-de-turuwozi-ji-atupudetosuru)
+[Slide at GoCon 2018 Spring (Japanese)](https://speakerdeck.com/marcosartori/go-selfupdate-github-de-turuwozi-ji-atupudetosuru)
 
-[go-github-selfupdate]: https://github.com/rhysd/go-github-selfupdate
+[go-github-selfupdate]: https://github.com/marcosartori/go-github-selfupdate
 [GitHub Releases API]: https://developer.github.com/v3/repos/releases/
 
 
@@ -50,7 +50,7 @@ Example to understand what this library does is prepared as [CLI](./cmd/selfupda
 Install it at first.
 
 ```
-$ go get -u github.com/rhysd/go-github-selfupdate/cmd/selfupdate-example
+$ go get -u github.com/marcosartori/go-github-selfupdate/cmd/selfupdate-example
 ```
 
 And check the version by `-version`. `-help` flag is also available to know all flags.
@@ -76,9 +76,9 @@ So running `-selfupdate` again only shows 'Current binary is the latest version'
 
 Following tools are using this library.
 
-- [dot-github](https://github.com/rhysd/dot-github)
-- [dotfiles](https://github.com/rhysd/dotfiles)
-- [github-clone-all](https://github.com/rhysd/github-clone-all)
+- [dot-github](https://github.com/marcosartori/dot-github)
+- [dotfiles](https://github.com/marcosartori/dotfiles)
+- [github-clone-all](https://github.com/marcosartori/github-clone-all)
 - [pythonbrew](https://github.com/utahta/pythonbrew)
 - [akashic](https://github.com/cowlick/akashic)
 - [butler](https://github.com/netzkern/butler)
@@ -106,7 +106,7 @@ Following is the easiest way to use this package.
 import (
     "log"
     "github.com/blang/semver"
-    "github.com/rhysd/go-github-selfupdate/selfupdate"
+    "github.com/marcosartori/go-github-selfupdate/selfupdate"
 )
 
 const version = "1.2.3"
@@ -134,7 +134,7 @@ Following asks user to update or not.
 import (
     "bufio"
     "github.com/blang/semver"
-    "github.com/rhysd/go-github-selfupdate/selfupdate"
+    "github.com/marcosartori/go-github-selfupdate/selfupdate"
     "log"
     "os"
 )
@@ -196,7 +196,7 @@ Following is an example of usage with GitHub Enterprise.
 import (
     "log"
     "github.com/blang/semver"
-    "github.com/rhysd/go-github-selfupdate/selfupdate"
+    "github.com/marcosartori/go-github-selfupdate/selfupdate"
 )
 
 const version = "1.2.3"
@@ -436,12 +436,12 @@ tj/go-update:
 
 Distributed under the [MIT License](LICENSE)
 
-[GoDoc Badge]: https://godoc.org/github.com/rhysd/go-github-selfupdate/selfupdate?status.svg
-[GoDoc]: https://godoc.org/github.com/rhysd/go-github-selfupdate/selfupdate
-[TravisCI Status]: https://travis-ci.org/rhysd/go-github-selfupdate.svg?branch=master
-[TravisCI]: https://travis-ci.org/rhysd/go-github-selfupdate
+[GoDoc Badge]: https://godoc.org/github.com/marcosartori/go-github-selfupdate/selfupdate?status.svg
+[GoDoc]: https://godoc.org/github.com/marcosartori/go-github-selfupdate/selfupdate
+[TravisCI Status]: https://travis-ci.org/marcosartori/go-github-selfupdate.svg?branch=master
+[TravisCI]: https://travis-ci.org/marcosartori/go-github-selfupdate
 [AppVeyor Status]: https://ci.appveyor.com/api/projects/status/1tpyd9q9tw3ime5u/branch/master?svg=true
-[AppVeyor]: https://ci.appveyor.com/project/rhysd/go-github-selfupdate/branch/master
-[Codecov Status]: https://codecov.io/gh/rhysd/go-github-selfupdate/branch/master/graph/badge.svg
-[Codecov]: https://codecov.io/gh/rhysd/go-github-selfupdate
+[AppVeyor]: https://ci.appveyor.com/project/marcosartori/go-github-selfupdate/branch/master
+[Codecov Status]: https://codecov.io/gh/marcosartori/go-github-selfupdate/branch/master/graph/badge.svg
+[Codecov]: https://codecov.io/gh/marcosartori/go-github-selfupdate
 [GitHub Enterprise]: https://enterprise.github.com/home
