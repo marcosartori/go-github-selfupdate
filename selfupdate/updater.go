@@ -8,6 +8,7 @@ import (
 	"github.com/google/go-github/github"
 	gitconfig "github.com/tcnksm/go-gitconfig"
 	"golang.org/x/oauth2"
+	"crypto/tls"
 )
 
 // Updater is responsible for managing the context of self-update.
@@ -42,6 +43,13 @@ func newHTTPClient(ctx context.Context, token string) *http.Client {
 
 // NewUpdater creates a new updater instance. It initializes GitHub API client.
 // If you set your API token to $GITHUB_TOKEN, the client will use it.
+func NewCfgUpdater(config Config, hc *http.Client) (*Updater, error) {
+	ctx := context.Background()
+	return newUpdater(config, hc,ctx)
+}
+
+// NewUpdater creates a new updater instance. It initializes GitHub API client.
+// If you set your API token to $GITHUB_TOKEN, the client will use it.
 func NewUpdater(config Config) (*Updater, error) {
 	token := config.APIToken
 	if token == "" {
@@ -50,8 +58,19 @@ func NewUpdater(config Config) (*Updater, error) {
 	if token == "" {
 		token, _ = gitconfig.GithubToken()
 	}
-	ctx := context.Background()
+	ctx := context.TODO()
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	sslclient:= &http.Client{Transport: tr}
+	ctx = context.WithValue(ctx, oauth2.HTTPClient, sslclient)
 	hc := newHTTPClient(ctx, token)
+
+
+	return newUpdater(config, hc, ctx)
+}
+
+func newUpdater(config Config, hc *http.Client, ctx context.Context) (*Updater, error) {
 
 	if config.EnterpriseBaseURL == "" {
 		client := github.NewClient(hc)
@@ -68,6 +87,7 @@ func NewUpdater(config Config) (*Updater, error) {
 	}
 	return &Updater{api: client, apiCtx: ctx, validator: config.Validator}, nil
 }
+
 
 // DefaultUpdater creates a new updater instance with default configuration.
 // It initializes GitHub API client with default API base URL.
